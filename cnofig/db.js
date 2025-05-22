@@ -1,12 +1,15 @@
 const mysql =require('mysql2')
 require("dotenv").config()
- const con=mysql.createConnection({
+
+ const con=mysql.createPool({
     host:process.env.host,
     user:process.env.user,
     password:process.env.pass,
-    database:process.env.dbName
- });
-
+    database:process.env.dbName,
+     waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+})
 
 con.getConnection((err, connection) => {
   if (err) {
@@ -15,5 +18,5 @@ con.getConnection((err, connection) => {
     console.log("MySQL connected successfully");
     connection.release(); 
   }
-} )
+});
  module.exports=con;
