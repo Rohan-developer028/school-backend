@@ -15,4 +15,5 @@ con.getConnection((err, connection) => {
     console.log("MySQL connected successfully");
     connection.release(); 
   }
+}
  module.exports=con;
